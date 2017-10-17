@@ -66,7 +66,8 @@ static bool isInit = false;
 // Disables pushing the flow measurement in the EKF
 static bool useFlowDisabled = false;
 
-#define NCS_PIN DECK_GPIO_IO3
+#define NCS_PIN DECK_GPIO_IO1 //IO1:For when bigquad deck is installed
+                              //IO3:Default: For when bigquad deck is not installed
 
 typedef struct motionBurst_s {
   union {

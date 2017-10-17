@@ -71,6 +71,33 @@ void powerStop()
   motorsSetRatio(MOTOR_M4, 0);
 }
 
+float powerRatioBasedOnDroneType(deepDroneType type)
+{
+  float ret_val = 0.0f; 
+  switch(type)
+  {
+    case DEEP_DRONE_1ST:
+      ret_val = 1; 
+      break; 
+    case DEEP_DRONE_2ND: 
+      ret_val = 1;
+      break;
+    case DEEP_DRONE_3RD: 
+      ret_val = 1;
+      break; 
+    case DEEP_DRONE_4TH: 
+      ret_val = 0.45;
+      break; 
+    case DEEP_DRONE_5TH: 
+      ret_val = 0.6;
+      break; 
+    default: 
+      break; 
+  }
+  
+  return ret_val;
+}
+
 void powerDistribution(const control_t *control)
 {
   #ifdef QUAD_FORMATION_X
@@ -91,6 +118,13 @@ void powerDistribution(const control_t *control)
                                control->yaw);
   #endif
 
+  float tmp = powerRatioBasedOnDroneType(TYPE_OF_DRONE);
+  
+  motorPower.m1 *= tmp;
+  motorPower.m2 *= tmp;
+  motorPower.m3 *= tmp;
+  motorPower.m4 *= tmp;
+  
   if (motorSetEnable)
   {
     motorsSetRatio(MOTOR_M1, motorPowerSet.m1);

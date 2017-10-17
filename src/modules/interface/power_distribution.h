@@ -28,10 +28,22 @@
 
 #include "stabilizer_types.h"
 
+#define TYPE_OF_DRONE 4
+
+typedef enum
+{
+  DEEP_DRONE_1ST,
+  DEEP_DRONE_2ND,
+  DEEP_DRONE_3RD,
+  DEEP_DRONE_4TH,
+  DEEP_DRONE_5TH
+} deepDroneType;
+
 void powerDistributionInit(void);
 bool powerDistributionTest(void);
 void powerDistribution(const control_t *control);
 void powerStop();
 
+float powerRatioBasedOnDroneType(deepDroneType type); 
 
 #endif //__POWER_DISTRIBUTION_H__
